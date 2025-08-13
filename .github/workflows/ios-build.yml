@@ -46,7 +46,7 @@ jobs:
         pod install
         
     - name: Cache CocoaPods
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: ios/Pods
         key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
@@ -81,7 +81,7 @@ jobs:
         
     - name: Upload iOS build artifacts
       if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/')
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: ios-build
         path: |
@@ -106,7 +106,7 @@ jobs:
         working-directory: ios
         
     - name: Download iOS build artifacts
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: ios-build
         path: ios/
