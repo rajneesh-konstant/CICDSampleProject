@@ -128,14 +128,31 @@ jobs:
     - name: Setup Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: '3.0'
-        bundler-cache: true
-        working-directory: ios
-        
+        ruby-version: '3.1'
+        bundler-cache: false
+
+    - name: Install Ruby dependencies
+      run: |
+        cd ios
+        # Install bundler if not present
+        gem install bundler --no-document
+        # Install gems from Gemfile if it exists
+        if [ -f "Gemfile" ]; then
+          bundle config set --local deployment false
+          bundle config set --local path vendor/bundle
+          bundle install --retry=3
+        fi
+
     - name: Install CocoaPods
       run: |
         cd ios
-        pod install
+        # Install CocoaPods if not present
+        if ! command -v pod &> /dev/null; then
+          echo "Installing CocoaPods..."
+          sudo gem install cocoapods --no-document
+        fi
+        # Install pods
+        pod install --repo-update
         
     - name: Setup Xcode
       uses: maxim-lobanov/setup-xcode@v1
