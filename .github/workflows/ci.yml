@@ -34,7 +34,7 @@ jobs:
       run: npm test -- --coverage --watchAll=false
       
     - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v4
       with:
         file: ./coverage/lcov.info
         flags: unittests
@@ -82,7 +82,7 @@ jobs:
       run: npm audit --audit-level=moderate
       
     - name: Run CodeQL Analysis
-      uses: github/codeql-action/init@v2
+      uses: github/codeql-action/init@v3
       with:
         languages: javascript
         
