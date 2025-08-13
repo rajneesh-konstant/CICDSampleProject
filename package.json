@@ -21,7 +21,7 @@
     "clean:ios": "cd ios && xcodebuild clean -workspace CiCdSampleProject.xcworkspace -scheme CiCdSampleProject"
   },
   "dependencies": {
-    "@react-native/new-app-screen": "0.80.2",
+    "@react-native/new-app-screen": "0.81.0",
     "react": "19.1.0",
     "react-native": "0.80.2",
     "react-native-paper": "^5.14.5"
