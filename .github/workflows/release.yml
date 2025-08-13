@@ -169,13 +169,13 @@ jobs:
     
     steps:
     - name: Trigger Android Deployment
-      uses: peter-evans/repository-dispatch@v2
+      uses: peter-evans/repository-dispatch@v3
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         event-type: deploy-android-production
         
     - name: Trigger iOS Deployment
-      uses: peter-evans/repository-dispatch@v2
+      uses: peter-evans/repository-dispatch@v3
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         event-type: deploy-ios-production
