@@ -106,7 +106,7 @@ jobs:
         working-directory: ios
         
     - name: Download iOS build artifacts
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v5
       with:
         name: ios-build
         path: ios/
