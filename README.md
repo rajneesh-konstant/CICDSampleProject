@@ -1,5 +1,25 @@
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
+# CI/CD Pipeline
+
+This project includes a comprehensive CI/CD pipeline using GitHub Actions with the following features:
+
+- 🚀 **Automated Testing** - Jest tests, ESLint, TypeScript checks, and security scans
+- 📱 **Cross-Platform Builds** - Automated Android APK/AAB and iOS builds
+- 🔒 **Secure Deployment** - Code signing and store deployment with secret management
+- 📦 **Automated Releases** - Tag-based releases with GitHub releases and store deployment
+- 🔄 **Dependency Updates** - Dependabot for automated dependency management
+
+## Workflows
+
+- **CI (`ci.yml`)** - Runs on every push/PR: tests, linting, type checking, security scans
+- **Android Build (`android-build.yml`)** - Builds APK/AAB and deploys to Google Play
+- **iOS Build (`ios-build.yml`)** - Builds iOS app and deploys to TestFlight
+- **Deploy (`deploy.yml`)** - Manual deployment to staging/production environments
+- **Release (`release.yml`)** - Automated releases on version tags
+
+See [CI/CD Setup Documentation](docs/CI_CD_SETUP.md) for detailed setup instructions.
+
 # Getting Started
 
 > **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.

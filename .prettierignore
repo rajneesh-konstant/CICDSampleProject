@@ -1,0 +1,11 @@
+node_modules/
+build/
+dist/
+coverage/
+*.log
+.DS_Store
+android/build/
+android/app/build/
+ios/build/
+ios/Pods/
+vendor/

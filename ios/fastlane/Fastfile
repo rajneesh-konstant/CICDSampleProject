@@ -1,0 +1,80 @@
+# Fastfile
+
+default_platform(:ios)
+
+platform :ios do
+
+  desc "Custom lane for building the app with multiple match types"
+  lane :custom_lane do
+    build_app(xcargs: "-allowProvisioningUpdates")
+    
+    # It's not typical to call multiple match types one after the other like this unless you're managing multiple builds or schemes.
+    # Choose the one(s) you need based on your use case
+
+    match(type: "appstore")
+
+    # If you are using multiple identifiers, specify them here
+    match(type: "development")
+
+    match(
+      type: "adhoc",
+      app_identifier: "tools.fastlane.app"
+    )
+
+    match(
+      type: "enterprise",
+      app_identifier: "tools.fastlane.app"
+    )
+  end
+
+  desc "Beta lane to register devices and fetch provisioning profiles"
+  lane :beta do
+    register_devices(devices_file: "./devices.txt")
+
+    match(
+      type: "adhoc",
+      force_for_new_devices: true
+    )
+
+    match(
+      type: "development",
+      template_name: "Apple Pay Pass Suppression Development"
+    )
+  end
+
+  desc "Build release version of the app"
+  lane :build_release do
+    match(type: "appstore")
+
+    build_app(
+      workspace: "CiCdSampleProject.xcworkspace",
+      scheme: "CiCdSampleProject",
+      configuration: "Release",
+      export_method: "app-store",
+      output_directory: "./build",
+      output_name: "CiCdSampleProject.ipa"
+    )
+  end
+
+  desc "Deploy to TestFlight"
+  lane :deploy_testflight do
+    upload_to_testflight(
+      skip_waiting_for_build_processing: true,
+      skip_submission: true,
+      distribute_external: false,
+      notify_external_testers: false
+    )
+  end
+
+  desc "Deploy to App Store"
+  lane :deploy_app_store do
+    upload_to_app_store(
+      force: true,
+      reject_if_possible: true,
+      skip_metadata: false,
+      skip_screenshots: true,
+      submit_for_review: false
+    )
+  end
+
+end
